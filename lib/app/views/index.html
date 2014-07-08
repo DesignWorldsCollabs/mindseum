@@ -1,0 +1,19 @@
+<import: src="./game">
+
+<Title:>
+  {{_page.meta.title}}
+
+<Head:>
+  <!-- Standard Meta -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Site Properities -->
+  <meta name="description" content="{{_page.meta.description}}">
+  <meta name="keywords" content="{{_page.meta.keywords}}">
+
+<Body:>
+  <view name="d-connection-alert"></view>
+  <view name="d-before-unload"></view>
+  <view name="{{$render.ns}}"></view>
+

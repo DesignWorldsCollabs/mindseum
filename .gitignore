@@ -1,0 +1,5 @@
+node_modules
+
+/* Ignore auto-generated files */
+public/derby
+

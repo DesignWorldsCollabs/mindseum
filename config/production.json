@@ -1,0 +1,9 @@
+{
+  "mongo": {
+    "db": "mindseum-production"
+  },
+  "redis": {
+    "enabled": true
+  }
+}
+

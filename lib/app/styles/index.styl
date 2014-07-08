@@ -1,0 +1,30 @@
+@import 'jeet'
+
+$breakpoint = 760px
+
+section
+  center($breakpoint)
+  @media screen and (min-aspect-ratio: 1/1)
+    /* square or landscape */
+
+a.tile
+  translate3d(0,0,0)
+  span(1/5, cycle: 5)
+  overflow: hidden
+  padding-bottom: 20%
+  background-color: transparent !important
+  background-size: cover
+  background-position: center center
+  background-repeat: no-repeat
+  transition: opacity 0.4s ease-out;
+
+  &:hover
+    /* http://davidwalsh.name/css-flip */
+    opacity: 0.9
+
+  &.linked
+    opacity: 0.2
+
+  &.connect
+    background-image: url(/images/9ce0639f-acd3-4b24-adce-c4a2492741c5.jpg)
+

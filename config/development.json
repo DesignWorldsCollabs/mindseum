@@ -1,0 +1,12 @@
+{
+  "mongo": {
+    "db": "mindseum-development"
+  },
+  "redis": {
+    "enabled": true,
+    "db": 3
+  },
+  "session": {
+    "secret": "USE A REAL SECRET WHEN YOU DEPLOY"
+  }
+}

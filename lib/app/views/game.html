@@ -1,0 +1,15 @@
+<index:>
+  <section>
+    {{each _page.board.beadIds as #id, #i}}
+      {{if #i === _page.board.center}}
+        <a class="connect tile"></a>
+      {{/if}}
+      <view name="bead" id="{{#id}}" beadIds="{{_page.chain.beadIds}}"></view>
+    {{/each}}
+  </section>
+
+<bead:>
+  <a class="bead tile {{class}}"
+     on-click="click()"
+     style="background-image: url(/images/{{id}}.jpg)">
+  </a>
