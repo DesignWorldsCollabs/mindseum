@@ -2,20 +2,49 @@
 
 $breakpoint = 760px
 
-section
-  center($breakpoint)
-  @media screen and (min-aspect-ratio: 1/1)
-    /* square or landscape */
+body
+  margin: 0
 
-a.tile
-  translate3d(0,0,0)
-  span(1/5, cycle: 5)
-  overflow: hidden
-  padding-bottom: 20%
+section#gameboard
+  width: 100vw; 
+  height: 100vh;   
+  max-height: 100vw;
+  max-width: 100vh;
+  position: absolute;
+  top:auto;
+  bottom:0;
+  left:0;
+  right:auto;
+  margin: auto;
+
+section#gamechain
+  position: absolute
+  margin: auto
+  top: 0
+  right: 0
+  overflow: scroll
+
+  /* square or landscape */
+  @media (min-aspect-ratio: 1/1)
+    width: calc(100vw - 100vh)
+    bottom: 0
+    left: auto
+
+  @media (max-aspect-ratio: 1/1)
+    height: calc(100vh - 100vw)
+    bottom: auto
+    left: 0
+
+a.bead, a.connect
   background-color: transparent !important
   background-size: cover
   background-position: center center
   background-repeat: no-repeat
+
+a.tile
+  translate3d(0,0,0)
+  span(1/5, cycle: 5)
+  padding-bottom: 20%
   transition: opacity 0.4s ease-out;
 
   &:hover
@@ -25,6 +54,18 @@ a.tile
   &.linked
     opacity: 0.2
 
-  &.connect
-    background-image: url(/images/9ce0639f-acd3-4b24-adce-c4a2492741c5.jpg)
+  &.disabled
+    opacity: 0.08
+
+a.string
+  display: block
+  float: left
+
+  @media (min-aspect-ratio: 1/1)
+    width: 10vh
+    height: 10vh
+
+  @media (max-aspect-ratio: 1/1)
+    width: 10vw
+    height: 10vw
 

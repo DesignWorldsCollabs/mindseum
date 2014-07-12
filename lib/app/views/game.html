@@ -1,10 +1,17 @@
 <index:>
-  <section>
+  <section id="gamechain">
+    {{each _page.chain as #id}}
+      <a class="bead string"
+         style="background-image: url(/images/{{#id}}.jpg)">
+      </a>
+    {{/each}}
+  </section>
+  <section id="gameboard">
     {{each _page.board.beadIds as #id, #i}}
       {{if #i === _page.board.center}}
-        <a class="connect tile"></a>
+        <view name="connect" beadIds="{{_page.chain}}"></view>
       {{/if}}
-      <view name="bead" id="{{#id}}" beadIds="{{_page.chain.beadIds}}"></view>
+      <view name="bead" id="{{#id}}" beadIds="{{_page.chain}}"></view>
     {{/each}}
   </section>
 
@@ -13,3 +20,10 @@
      on-click="click()"
      style="background-image: url(/images/{{id}}.jpg)">
   </a>
+
+<connect:>
+  <a class="connect tile {{class}}"
+     on-click="click()"
+     style="background-image: url(/images/{{id}}.jpg)">
+  </a>
+
