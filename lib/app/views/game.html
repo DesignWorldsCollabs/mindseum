@@ -31,6 +31,7 @@
   </a>
 
 <url:>
-  <input name="url" value="{{url}}" on-blur="validate(url)" type="text" placeholder="https://">
-  <button disabled="{{if state != 'exists'}}true{{/}}">Add</button>
+  <input name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
+  <button disabled="{{if state != 'exists'}}true{{/}}">Add</button>&nbsp;
+  {{if touched === true}}{{if state === 'error'}}<span>invalid url</span>{{/}}{{/}}
 
