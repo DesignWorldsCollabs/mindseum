@@ -132,6 +132,9 @@ module.exports.generate = function generate(options) {
         doc: 'trust the reverse proxy x-forwarded-proto',
         default: false
       }
+    },
+    readability: {
+      default: '7abb62e7abe16ba330e27234d339737c6c8fbe44'
     }
   });
 

@@ -1,10 +1,13 @@
 <index:>
   <section id="gamechain">
-    {{each _page.chain as #id}}
-      <a class="bead string"
-         style="background-image: url(/images/{{#id}}.jpg)">
-      </a>
-    {{/each}}
+    <div id="result">
+      <view name="url" url="{{_page.url}}"></view>
+    </div>
+    <ul id="chain">
+      {{each _page.chain as #id}}
+        <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
+      {{/each}}
+    </ul>
   </section>
   <section id="gameboard">
     {{each _page.board.beadIds as #id, #i}}
@@ -26,4 +29,8 @@
      on-click="click()"
      style="background-image: url(/images/{{id}}.jpg)">
   </a>
+
+<url:>
+  <input name="url" value="{{url}}" on-blur="validate(url)" type="text" placeholder="https://">
+  <button disabled="{{if state != 'exists'}}true{{/}}">Add</button>
 

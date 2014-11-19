@@ -14,9 +14,11 @@
   "dependencies": {
     "d-connection-alert": "~0.1.0",
     "d-before-unload": "~0.1.0",
+    "morgan": "~1.5.0",
     "stylus": "~0.46.3",
     "autoprefixer-stylus": "~0.1.0",
     "jeet": "~5.2.10",
+    "axis": "~0.2.0",
     "superagent": "~0.18.0",
     "inherits": "~2.0.1",
     "convict": "~0.4.2",
@@ -35,7 +37,7 @@
     "livedb-mongo": "~0.3.2",
     "racer-bundle": "~0.1.1",
     "racer-browserchannel": "~0.2.0",
-    "derby": "0.6.0-alpha23"
+    "derby": "0.6.0-alpha28"
   },
   "engines": {
     "node": "0.10.x"
@@ -45,6 +47,6 @@
     "awsbox": "0.7.0",
     "eslint": "^0.6.2",
     "jsonlint": "^1.6.0",
-    "async": "^0.9.0"
+    "node-inspector": "^0.7.0"
   }
 }
