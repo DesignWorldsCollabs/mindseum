@@ -31,7 +31,16 @@
   </a>
 
 <url:>
-  <input name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
-  <button disabled="{{if state != 'exists'}}true{{/}}">Add</button>&nbsp;
-  {{if touched === true}}{{if state === 'error'}}<span>invalid url</span>{{/}}{{/}}
+  <form on-submit="onSubmit()">
+    <input name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
+    <button type="submit" disabled="{{if state != 'exists'}}true{{/}}">Add</button>&nbsp;
+    <span>
+      {{if touched === true}}{{if state === 'error'}}invalid url{{/}}{{/}}
+      {{if state === 'summarizing'}}checking that out...{{/}}
+      {{if state === 'summarized'}}suggested{{/}}
+    </span>
+  </form>
+  <h4>{{title}}</h4>
+  <p>{{summary}}</p>
+  <small>{{source}}</small>
 
