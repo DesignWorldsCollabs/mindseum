@@ -42,7 +42,7 @@
     "superagent": "~0.21.0"
   },
   "engines": {
-    "npm": "2.7.0",
+    "npm": "2.11.0",
     "node": "0.10.36"
   },
   "private": true,
