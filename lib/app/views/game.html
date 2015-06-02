@@ -32,15 +32,18 @@
 
 <url:>
   <form on-submit="onSubmit()">
-    <input name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
-    <button type="submit" disabled="{{if state != 'exists'}}true{{/}}">Add</button>&nbsp;
-    <span>
-      {{if touched === true}}{{if state === 'error'}}invalid url{{/}}{{/}}
-      {{if state === 'summarizing'}}checking that out...{{/}}
-      {{if state === 'summarized'}}suggested{{/}}
-    </span>
+    <div class="field">
+      <input class="{{state}} left" name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
+      <button class="{{state}} right" type="submit">
+        {{if state === 'summarizing'}}summarizing...
+        {{else if state === 'summarized'}}suggested
+        {{else}}Suggest{{/}}
+      </button>
+    </div>
   </form>
-  <h4>{{title}}</h4>
-  <p>{{unescaped summary}}</p>
-  <small>{{source}}</small>
+  {{if state === 'summarized'}}
+    <h4>{{title}}</h4>
+    <p>{{unescaped summary}}</p>
+    <small>{{source}}</small>
+  {{/}}
 

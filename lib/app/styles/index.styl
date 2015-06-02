@@ -75,22 +75,12 @@ section#gamechain
 #chain
   position: absolute
   padding: 0
-
-  @media (min-aspect-ratio: 1/1)
-    width: 10vh
-    height: 40vh
-    top: 10vh
-    left: 0
-    right: 0
-    margin: 0 auto
-
-  @media (max-aspect-ratio: 1/1)
-    width: 40vw
-    height: 10vw
-    top: 5vw
-    left: 0
-    right: 0
-    margin: 0 auto
+  width: 40vw
+  height: 10vw
+  top: 5vw
+  left: 0
+  right: 0
+  margin: 0 auto
 
 
 #result
@@ -106,9 +96,32 @@ section#gamechain
   @media (max-aspect-ratio: 1/1)
     margin: 20vw 5vw 5vw
 
-  input
-    width: 100%
-    border: 0
-    border-bottom: 1px solid #BBB
-    outline: none
+.field
+  display: flex
+  &.url:before
+    flex: 0 0 2.75em
+  .left
+    flex: 1 0 8em
+  .right
+    flex: 0 0 auto
 
+button
+  outline: none
+  button()
+  &.empty
+    button-disabled()
+  &.error
+    button-disabled()
+  &.validating
+    button-disabled()
+  &.summarizing
+    button-disabled()
+  &.summarized
+    button-disabled()
+
+input[type='text']
+  input()
+  &.error
+    input-error()
+  &.validating
+    input-warning()
