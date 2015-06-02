@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "debug": "NODE_ENV=production SESSION_SECRET='USE A REAL SECRET WHEN YOU DEPLOY' node-debug server.js",
     "seed": "node bin/seed.js",
     "test": "eslint config lib"
   },
