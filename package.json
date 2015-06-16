@@ -48,6 +48,7 @@
     "node": "0.10.38"
   },
   "private": true,
+  "license": "Apache 2.0",
   "devDependencies": {
     "awsbox": "0.7.0",
     "eslint": "^0.22.1",
