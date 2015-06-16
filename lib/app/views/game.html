@@ -39,33 +39,20 @@
       </button>
     </div>
   </form>
-  {{if state === 'summarized'}}
-    <fieldset>
-      <legend>Suggested</legend>
-      <ul id="chain">
-        {{each beadIds as #id}}
-          <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
-        {{/each}}
-      </ul>
-      <input value="{{title}}" placeholder="title" type="text">
-      <textarea placeholder="summary">
-        {{summary}}
-      </textarea>
-      <small>{{source}}</small>
-      <div>{{url}}</div>
-    </fieldset>
-  {{/}}
 
 <chain:>
   <fieldset>
-    <legend>Suggested</legend>
-    <ul id="chain">
-      {{each #chain.beadIds as #id}}
-        <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
-      {{/each}}
-    </ul>
-    <input value="{{#chain.title}}" placeholder="title" type="text">
-    <textarea placeholder="summary">
+    <legend>
+      <ul id="chain">
+        {{each #chain.beadIds as #id}}
+          <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
+        {{/each}}
+      </ul>
+    </legend>
+    <label for="title">Article Title</label>
+    <input value="{{#chain.title}}" type="text" id="title">
+    <label for="summary">Article Summary</label>
+    <textarea id="summary">
       {{#chain.summary}}
     </textarea>
     <small>{{#chain.source}}</small>
