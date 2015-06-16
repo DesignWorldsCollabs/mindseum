@@ -1,13 +1,11 @@
 <index:>
   <section id="gamechain">
     <div id="result">
-      <view name="url" url="{{_page.url}}"></view>
-    </div>
-    <ul id="chain">
-      {{each _page.chain as #id}}
-        <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
+      <view name="url" url="{{_page.url}}" beadIds="{{_page.chain}}" chains="{{_page.chains}}"></view>
+      {{each _page.chains as #chain}}
+        <view name="chain" chain="{{#chain}}"></view>
       {{/each}}
-    </ul>
+    </div>
   </section>
   <section id="gameboard">
     {{each _page.board.beadIds as #id, #i}}
@@ -42,8 +40,34 @@
     </div>
   </form>
   {{if state === 'summarized'}}
-    <h4>{{title}}</h4>
-    <p>{{unescaped summary}}</p>
-    <small>{{source}}</small>
+    <fieldset>
+      <legend>Suggested</legend>
+      <ul id="chain">
+        {{each beadIds as #id}}
+          <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
+        {{/each}}
+      </ul>
+      <input value="{{title}}" placeholder="title" type="text">
+      <textarea placeholder="summary">
+        {{summary}}
+      </textarea>
+      <small>{{source}}</small>
+      <div>{{url}}</div>
+    </fieldset>
   {{/}}
 
+<chain:>
+  <fieldset>
+    <legend>Suggested</legend>
+    <ul id="chain">
+      {{each #chain.beadIds as #id}}
+        <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
+      {{/each}}
+    </ul>
+    <input value="{{#chain.title}}" placeholder="title" type="text">
+    <textarea placeholder="summary">
+      {{#chain.summary}}
+    </textarea>
+    <small>{{#chain.source}}</small>
+    <div>{{#chain.url}}</div>
+  </fieldset>
