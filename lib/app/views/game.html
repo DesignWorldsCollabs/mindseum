@@ -35,11 +35,7 @@
           <li class="bead string" style="background-image: url(/images/{{#beadId}}.jpg)"></li>
         {{/each}}
       </ul>
-      <button class="{{state}} right" type="submit">
-        {{if state === 'summarizing'}}summarizing...
-        {{else if state === 'summarized'}}suggested
-        {{else}}Suggest{{/}}
-      </button>
+      <button class="{{state}} right" type="submit">Associate</button>
     </div>
   </form>
 
