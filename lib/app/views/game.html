@@ -49,12 +49,13 @@
         {{/each}}
       </ul>
     </legend>
-    <label for="title">Article Title</label>
+    <div>{{#chain.url}}<br /><br /></div>
+    <label for="title">Title</label>
     <input value="{{#chain.title}}" type="text" id="title">
-    <label for="summary">Article Summary</label>
+    <label for="summary">Summary</label>
     <textarea id="summary">
       {{#chain.summary}}
     </textarea>
     <small>{{#chain.source}}</small>
-    <div>{{#chain.url}}</div>
+    <div><a on-click="del()">delete</a></div>
   </fieldset>
