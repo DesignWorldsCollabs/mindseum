@@ -30,6 +30,11 @@
   <form on-submit="onSubmit()">
     <div class="field">
       <input class="{{state}} left" name="url" value="{{url}}" type="text" on-blur="onBlur()" placeholder="https://">
+      <ul id="chain">
+        {{each beadIds as #beadId}}
+          <li class="bead string" style="background-image: url(/images/{{#beadId}}.jpg)"></li>
+        {{/each}}
+      </ul>
       <button class="{{state}} right" type="submit">
         {{if state === 'summarizing'}}summarizing...
         {{else if state === 'summarized'}}suggested
