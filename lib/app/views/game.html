@@ -2,9 +2,7 @@
   <section id="gamechain">
     <div id="result">
       <view name="url" url="{{_page.url}}" beadIds="{{_page.chain}}" chains="{{_page.chains}}"></view>
-      {{each _page.chains as #chain}}
-        <view name="chain" chain="{{#chain}}"></view>
-      {{/each}}
+      <view name="associations" beadIds="{{_page.chain}}"></view>
     </div>
   </section>
   <section id="gameboard">
@@ -40,22 +38,27 @@
     </div>
   </form>
 
+<associations:>
+  {{each associations}}
+    <view name="chain" chain="{{this}}"></view>
+  {{/each}}
+
 <chain:>
   <fieldset>
     <legend>
       <ul id="chain">
-        {{each #chain.beadIds as #id}}
+        {{each chain.beadIds as #id}}
           <li class="bead string" style="background-image: url(/images/{{#id}}.jpg)"></li>
         {{/each}}
       </ul>
     </legend>
-    <div>{{#chain.url}}<br /><br /></div>
+    <div>{{chain.url}}<br /><br /></div>
     <label for="title">Title</label>
-    <input value="{{#chain.title}}" type="text" id="title">
+    <input value="{{chain.title}}" type="text" id="title">
     <label for="summary">Summary</label>
     <textarea id="summary">
-      {{#chain.summary}}
+      {{chain.summary}}
     </textarea>
-    <small>{{#chain.source}}</small>
+    <small>{{chain.source}}</small>
     <div><a on-click="del()">delete</a></div>
   </fieldset>
