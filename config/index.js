@@ -38,6 +38,11 @@ module.exports.generate = function generate(options) {
       doc: 'The writeScripts folder to serve app bundles.',
       default: path.resolve('public')
     },
+    temp: {
+      doc: 'The writeScripts folder to serve app bundles.',
+      default: '',
+      env: 'TEMP'
+    },
     static: {
       doc: 'The folders express.static should serve.',
       format: mountPoints,
@@ -152,8 +157,13 @@ module.exports.generate = function generate(options) {
 function mountPublic(config) {
   var s = config.get('static');
   var p = config.get('public');
+  var t = config.get('temp');
   if (s.map(extractDir).indexOf(p) === -1) {
     s.unshift({route: '/', dir: p});
+    config.set('static', s)
+  }
+  if (t.length > 0 && s.map(extractDir).indexOf(t) === -1) {
+    s.unshift({route: '/', dir: t});
     config.set('static', s)
   }
 }
