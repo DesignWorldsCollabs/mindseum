@@ -5,7 +5,7 @@ var yamlify = require('yamlify');
 module.exports = store;
 
 function store(derby, publicDir) {
-  var mongo = liveDbMongo(process.env.MONGO_URL + '?auto_reconnect', {safe: true});
+  var mongo = liveDbMongo((process.env.MONGOLAB_URI || process.env.MONGO_URL) + '?auto_reconnect', {safe: true});
 
   derby.use(require('racer-bundle'));
   derby.use(require('racer-schema'), require('./schema'));
