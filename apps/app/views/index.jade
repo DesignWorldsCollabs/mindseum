@@ -13,23 +13,24 @@ Body:
 
 header:
   nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
-    div.container
+    div.container-fluid
       div.navbar-header
         button.navbar-toggle(type="button",on-click="navbarCollapse.toggle()")
           span.sr-only Toggle navigation
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href="/") mindseum
+        a.navbar-brand(href="/") Mindseum
       collapse.navbar-collapse(as="navbarCollapse")
         ul.nav.navbar-nav
           li.active
-            a(href="/") Home
+            a(href="/") Explore
           li
-            a(href="#about") About
+            a(href="/") Collect
           li
-            a(href="#contact") Contact
+            a(href="/") Associate
 
+        ul.nav.navbar-nav.navbar-right
           if _session.loggedIn
             li
               a(href="/auth/logout") Logout
@@ -38,7 +39,7 @@ header:
               a(href="/login") Login
 
 footer:
-  div.container
+  div.container-fluid
     hr
     footer
       p Footer {{@year}}
