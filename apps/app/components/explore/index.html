@@ -1,0 +1,48 @@
+<index:>
+  <svg
+   as="svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="100%"
+   height="100%"
+   viewBox="0 0 {{width}} {{height}}"
+   preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <filter id="blurry" x="0%" y="0%" height="100%" width="100%" primitiveUnits="userSpaceOnUse">
+        <feGaussianBlur x="0" y="0" width="{{width}}" height="{{height}}" stdDeviation="30" in="SourceGraphic" result="blurSquares"/>
+        <feComponentTransfer in="blurSquares" result="opaqueBlur">
+          <feFuncA type="linear" intercept="1"/>
+        </feComponentTransfer>
+        <feBlend mode="normal" in="opaqueBlur" in2="SourceGraphic"/>
+      </filter>
+      {{each beads}}
+        <pattern
+          id="{{this.id}}"
+          patternUnits="userSpaceOnUse"
+          patternContentUnits="objectBoundingBox"
+          x="{{this.cx - this.r}}"
+          y="{{this.cy - this.r}}"
+          width="{{2 * this.r}}"
+          height="{{2 * this.r}}">
+          <image xlink:href="/img/{{this.id}}.jpg" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>
+        </pattern>
+        <clipPath id="{{this.id}}-clip">
+          <circle cx="{{this.cx}}" cy="{{this.cy}}" r="{{this.r}}">
+          </circle>
+        </clipPath>
+      {{/each}}
+    </defs>
+    {{each beads}}
+      <circle
+        cx="{{this.cx}}"
+        cy="{{this.cy}}"
+        r="{{this.r}}"
+        fill="url(#{{this.id}})"
+        filter="{{if !this.active}}url(#blurry){{/if}}"
+        clip-path="url(#{{this.id}}-clip" />
+      <polygon
+        points="{{this.p}}"
+        fill-opacity="0"
+        on-mouseover="mouseover($at(this))"
+        on-mouseout="mouseout($at(this))" />
+    {{/each}}
+  </svg>
