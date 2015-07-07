@@ -16,12 +16,18 @@ Explore.prototype.mousemove = function (event) {
   console.log(this);
 }
 
+Explore.prototype.click = function (bead) {
+  if (!bead.get('active')) return bead.set('active', 'active');
+  bead.del('active');
+  bead.del('hover');
+}
+
 Explore.prototype.mouseover = function (bead) {
-  bead.set('active', true)
+  bead.set('hover', 'hover')
 }
 
 Explore.prototype.mouseout = function (bead) {
-  bead.del('active')
+  bead.del('hover')
 }
 
 Explore.prototype.voronoi = function () {

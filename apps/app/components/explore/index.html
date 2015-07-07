@@ -7,6 +7,11 @@
    viewBox="0 0 {{width}} {{height}}"
    preserveAspectRatio="xMidYMid meet">
     <defs>
+      <style>
+        .transition { opacity: 1; transition: opacity 0.4s ease-out }
+        .active { opacity: 0.5 }
+        .hover, .active { filter: none }
+      </style>
       <filter id="blurry" x="0%" y="0%" height="100%" width="100%" primitiveUnits="userSpaceOnUse">
         <feGaussianBlur x="0" y="0" width="{{width}}" height="{{height}}" stdDeviation="30" in="SourceGraphic" result="blurSquares"/>
         <feComponentTransfer in="blurSquares" result="opaqueBlur">
@@ -33,16 +38,20 @@
     </defs>
     {{each beads}}
       <circle
+        class="{{this.active}} {{this.hover}} transition"
         cx="{{this.cx}}"
         cy="{{this.cy}}"
         r="{{this.r}}"
         fill="url(#{{this.id}})"
-        filter="{{if !this.active}}url(#blurry){{/if}}"
+        filter="url(#blurry)"
         clip-path="url(#{{this.id}}-clip" />
       <polygon
         points="{{this.p}}"
         fill-opacity="0"
+        on-click="click($at(this))"
         on-mouseover="mouseover($at(this))"
-        on-mouseout="mouseout($at(this))" />
+        on-mouseout="mouseout($at(this))"
+        stroke="#EEE"
+        stroke-width="1" />
     {{/each}}
   </svg>
