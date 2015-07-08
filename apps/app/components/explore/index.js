@@ -71,14 +71,14 @@ Explore.prototype.draw = function () {
   var beads = [];
   var layout = this.defaultLayout();
   var polygons = this.voronoi();
-  var radii = this.shortestDistance();
+  var radius = this.shortestDistance() * 0.9;
   var beadIds = this.model.get('beadIds');
   for (var i = 0; i < beadIds.length; i++) {
     beads.push({
       id: beadIds[i],
       cx: layout[i][0],
       cy: layout[i][1],
-      r: radii[i]*0.9,
+      r: radius,
       p: polygons[i]
     })
   }
@@ -117,8 +117,7 @@ Explore.prototype.voronoi = function () {
 }
 
 Explore.prototype.shortestDistance = function () {
-  var shortest = {};
-  var radii = [];
+  var shortest = undefined;
   var layout = this.defaultLayout();
   var links = d3.geom.voronoi().links(layout);
   var d, dx, dy, s, t;
@@ -128,11 +127,7 @@ Explore.prototype.shortestDistance = function () {
     dx = s[0] - t[0]
     dy = s[1] - t[1]
     d = Math.floor(Math.sqrt(dx*dx + dy*dy) / 2);
-    shortest[s.join(',')] = shortest[s.join(',')] ? Math.min(d, shortest[s.join(',')]) : d
-    shortest[t.join(',')] = shortest[t.join(',')] ? Math.min(d, shortest[t.join(',')]) : d
+    shortest = shortest ? Math.min(d, shortest) : d
   }
-  for (var j = 0; j < layout.length; j++) {
-    radii.push(shortest[layout[j].join(',')])
-  }
-  return radii;
+  return shortest;
 }
