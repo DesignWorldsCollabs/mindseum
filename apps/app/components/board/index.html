@@ -70,3 +70,7 @@
   {{each beads}}
     <a id="{{this.id}}-link" href="{{url(this.id)}}" style="display:none"></a>
   {{/each}}
+
+  {{if preview}}
+  <modal as="preview" href="{{url(preview)}}" src="/img/{{preview}}.jpg"></modal>
+  {{/}}

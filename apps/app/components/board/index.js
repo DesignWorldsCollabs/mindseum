@@ -37,7 +37,7 @@ Board.prototype.init = function (model) {
       d = Math.floor(Math.sqrt(dx*dx + dy*dy) / 2);
       shortest = shortest ? Math.min(d, shortest) : d
     }
-    return shortest;
+    return shortest - 2;
   }
   function drawBeads(points, radius, beads) {
     return beads.map(function each(bead, i) {
@@ -96,8 +96,10 @@ Board.prototype.active = function (connections, beadId) {
 }
 
 Board.prototype.click = function (id) {
+  this.model.set('preview', id);
   if (this.model.at('connections').get().indexOf(id) === -1)
-    document.getElementById(id + '-link').click();
+    this.preview.show();
+    // document.getElementById(id + '-link').click();
 }
 
 Board.prototype.hovered = function (hover, id) {
