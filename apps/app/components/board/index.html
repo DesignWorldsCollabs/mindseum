@@ -12,6 +12,7 @@
         .active { opacity: 0.5 }
         .hover, .active { filter: none }
       </style>
+
       <filter id="blurry" x="0%" y="0%" height="100%" width="100%" primitiveUnits="userSpaceOnUse">
         <feGaussianBlur x="0" y="0" width="{{width}}" height="{{height}}" stdDeviation="30" in="SourceGraphic" result="blurSquares"/>
         <feComponentTransfer in="blurSquares" result="opaqueBlur">
@@ -19,47 +20,53 @@
         </feComponentTransfer>
         <feBlend mode="normal" in="opaqueBlur" in2="SourceGraphic"/>
       </filter>
-      {{with this.radius as #r}}
-      {{each beads}}
+
+      {{each patterns}}
         <pattern
           id="{{this.id}}"
           patternUnits="userSpaceOnUse"
           patternContentUnits="objectBoundingBox"
-          x="{{this.cx - #r}}"
-          y="{{this.cy - #r}}"
-          width="{{2 * #r}}"
-          height="{{2 * #r}}">
+          x="{{this.x}}"
+          y="{{this.y}}"
+          width="{{this.width}}"
+          height="{{this.height}}">
           <rect x="0" y="0" width="1" height="1" fill="white" />
           <image xlink:href="/img/{{this.id}}.jpg" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>
         </pattern>
         <clipPath id="{{this.id}}-clip">
-          <circle cx="{{this.cx}}" cy="{{this.cy}}" r="{{#r}}">
+          <circle cx="{{this.cx}}" cy="{{this.cy}}" r="{{this.r}}">
           </circle>
         </clipPath>
       {{/each}}
-      {{/with}}
     </defs>
-    {{with this.radius as #r}}
+
+    {{with hover as #hover}}
+    {{with connections as #connections}}
     {{each beads}}
-      <circle
-        class="{{active(this.id)}} {{this.hover}} transition"
-        cx="{{this.cx}}"
-        cy="{{this.cy}}"
-        r="{{#r}}"
-        fill="url(#{{this.id}})"
-        filter="url(#blurry)"
-        clip-path="url(#{{this.id}}-clip" />
-      <polygon
-        points="{{this.p}}"
-        fill-opacity="0"
-        on-click="click(this.id)"
-        on-mouseover="mouseover($at(this))"
-        on-mouseout="mouseout($at(this))"
-        stroke="#EEE"
-        stroke-width="1" />
+    <circle
+      class="{{active(#connections, this.id)}} {{hovered(hover, this.id)}} transition"
+      cx="{{this.cx}}"
+      cy="{{this.cy}}"
+      r="{{this.r}}"
+      fill="url(#{{this.id}})"
+      filter="url(#blurry)"
+      clip-path="url(#{{this.id}}-clip" />
     {{/each}}
     {{/with}}
+    {{/with}}
+
+    {{each polygons}}
+    <polygon
+      points="{{this.points}}"
+      fill-opacity="0"
+      on-click="click(this.id)"
+      on-mouseover="mouseover(this.id)"
+      on-mouseout="mouseout(this.id)"
+      stroke="#FAFAFA"
+      stroke-width="1" />
+    {{/each}}
   </svg>
+
   {{each beads}}
     <a id="{{this.id}}-link" href="{{url(this.id)}}" style="display:none"></a>
   {{/each}}

@@ -1,3 +1,3 @@
 module.exports = function(app, options) {
-  app.component(require('./explore'));
+  app.component(require('./board'));
 };
