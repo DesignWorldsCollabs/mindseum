@@ -79,7 +79,8 @@ Explore.prototype.draw = function () {
       cx: layout[i][0],
       cy: layout[i][1],
       r: radius,
-      p: polygons[i]
+      p: polygons[i],
+      active: this.model.get('beads.' + i + '.active')
     })
   }
   this.model.setDiff('beads', beads);
