@@ -12,7 +12,7 @@
       </style>
 
       <filter id="blurry" x="0%" y="0%" height="100%" width="100%" primitiveUnits="userSpaceOnUse">
-        <feGaussianBlur x="0" y="0" width="{{width}}" height="{{height}}" stdDeviation="30" in="SourceGraphic" result="blurSquares"/>
+        <feGaussianBlur x="0" y="0" width="{{width}}" height="{{height}}" stdDeviation="{{radius * 0.4}}" in="SourceGraphic" result="blurSquares"/>
         <feComponentTransfer in="blurSquares" result="opaqueBlur">
           <feFuncA type="linear" intercept="1"/>
         </feComponentTransfer>
