@@ -1,11 +1,11 @@
-module.exports = Modal;
-function Modal() {}
-Modal.prototype.name = 'modal';
-Modal.prototype.view = __dirname;
+module.exports = Preview;
+function Preview() {}
+Preview.prototype.name = 'preview';
+Preview.prototype.view = __dirname;
 
-Modal.prototype.create = function(model, dom) {
+Preview.prototype.create = function(model, dom) {
   var modal = this;
-  var render = model.scope('$render.modal')
+  var render = model.scope('$render.preview')
   dom.on('keydown', function(e) {
     if (!render.get('show')) return;
     if (e.keyCode === 27) {  // Escape
@@ -17,8 +17,8 @@ Modal.prototype.create = function(model, dom) {
   });
 };
 
-Modal.prototype.show = function() {
-  var render = this.model.scope('$render.modal')
+Preview.prototype.show = function() {
+  var render = this.model.scope('$render.preview')
   this.emitDelayable('show', function() {
     render.set('show', true);
     setTimeout(function() {
@@ -27,10 +27,10 @@ Modal.prototype.show = function() {
   });
 };
 
-Modal.prototype.hide = function(action) {
+Preview.prototype.hide = function(action) {
   var cancelled = this.emitCancellable('hide', action);
   if (cancelled) return;
-  var render = this.model.scope('$render.modal')
+  var render = this.model.scope('$render.preview')
   render.set('faded', false);
   setTimeout(function() {
     render.set('show', false);

@@ -1,0 +1,16 @@
+<index:>
+  <div
+    class="modal fade{{if #root.$render.preview.faded}} in{{/if}}"
+    style="{{if #root.$render.preview.show}}display: block{{/if}}"
+    on-click="hide('backdrop')">
+    <div class="modal-dialog" style="margin: 10vh auto; width: {{width}}px">
+      <div class="modal-content">
+        <a href="{{@href}}">
+          <img as="img" src="{{@src}}" style="max-width: 60vw; max-height: 80vh" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+<backdrop:>
+  {{if #root.$render.preview.show}}<div on-click="hide('backdrop')" class="modal-backdrop fade{{if #root.$render.preview.faded}} in{{/if}}"></div>{{/if}}
