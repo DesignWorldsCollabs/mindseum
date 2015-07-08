@@ -8,44 +8,7 @@ Explore.prototype.view = __dirname;
 Explore.prototype.init = function (model) {
   this.model.setNull('width', 1440);
   this.model.setNull('height', 755);
-  this.model.setNull('beads', this.defaultBeads());
-}
-
-Explore.prototype.mousemove = function (event) {
-  console.log(arguments);
-  console.log(this);
-}
-
-Explore.prototype.click = function (bead) {
-  if (!bead.get('active')) return bead.set('active', 'active');
-  bead.del('active');
-  bead.del('hover');
-}
-
-Explore.prototype.mouseover = function (bead) {
-  bead.set('hover', 'hover')
-}
-
-Explore.prototype.mouseout = function (bead) {
-  bead.del('hover')
-}
-
-Explore.prototype.voronoi = function () {
-  var layout = this.defaultLayout();
-  var w = this.model.get('width');
-  var h = this.model.get('height');
-  return d3.geom.voronoi().clipExtent([[0,0],[w,h]])(layout).map(function(l){
-    return l.map(function(c){
-      return c.join(',')
-    }).join(' ')
-  })
-}
-
-Explore.prototype.defaultBeads = function () {
-  var beads = [];
-  var layout = this.defaultLayout();
-  var polygons = this.voronoi();
-  return [
+  this.model.setNull('beadIds', [
     '6b8bcfa5-8186-4014-840b-293b577f8353',
     '4f7f7c3f-f204-43ba-b5b0-11e2552a3822',
     'bd6b38f2-3753-463b-a88b-ac77c0d4a8df',
@@ -70,15 +33,56 @@ Explore.prototype.defaultBeads = function () {
     '69be0e87-0e22-4c38-b011-010f151d9405',
     'db85d9dc-2e65-4d9d-a19c-e608e87af535',
     '2488b848-166e-4332-8b98-2b162f363be4'
-  ].map(function(id, i) {
-    return {
-      id: id,
+  ]);
+  this.draw();
+}
+
+Explore.prototype.create = function (model, dom) {
+  dom.on('resize', window, this.setDimensions.bind(this));
+  this.setDimensions();
+}
+
+Explore.prototype.setDimensions = function () {
+  this.model.set('width', this.svg.clientWidth);
+  this.model.set('height', this.svg.clientHeight);
+  this.draw();
+}
+
+Explore.prototype.mousemove = function (event) {
+  console.log(arguments);
+  console.log(this);
+}
+
+Explore.prototype.click = function (bead) {
+  if (!bead.get('active')) return bead.set('active', 'active');
+  bead.del('active');
+  bead.del('hover');
+}
+
+Explore.prototype.mouseover = function (bead) {
+  bead.set('hover', 'hover')
+}
+
+Explore.prototype.mouseout = function (bead) {
+  bead.del('hover')
+}
+
+Explore.prototype.draw = function () {
+  var beads = [];
+  var layout = this.defaultLayout();
+  var polygons = this.voronoi();
+  var radii = this.shortestDistance();
+  var beadIds = this.model.get('beadIds');
+  for (var i = 0; i < beadIds.length; i++) {
+    beads.push({
+      id: beadIds[i],
       cx: layout[i][0],
       cy: layout[i][1],
-      r: 60,
+      r: radii[i]*0.9,
       p: polygons[i]
-    }
-  })
+    })
+  }
+  this.model.setDiff('beads', beads);
 }
 
 Explore.prototype.defaultLayout = function () {
@@ -99,4 +103,36 @@ Explore.prototype.defaultLayout = function () {
     }
   }
   return layout;
+}
+
+Explore.prototype.voronoi = function () {
+  var layout = this.defaultLayout();
+  var w = this.model.get('width');
+  var h = this.model.get('height');
+  return d3.geom.voronoi().clipExtent([[0,0],[w,h]])(layout).map(function(l){
+    return l.map(function(c){
+      return c.join(',')
+    }).join(' ')
+  })
+}
+
+Explore.prototype.shortestDistance = function () {
+  var shortest = {};
+  var radii = [];
+  var layout = this.defaultLayout();
+  var links = d3.geom.voronoi().links(layout);
+  var d, dx, dy, s, t;
+  for (var i = 0; i < links.length; i++) {
+    s = links[i].source
+    t = links[i].target
+    dx = s[0] - t[0]
+    dy = s[1] - t[1]
+    d = Math.floor(Math.sqrt(dx*dx + dy*dy) / 2);
+    shortest[s.join(',')] = shortest[s.join(',')] ? Math.min(d, shortest[s.join(',')]) : d
+    shortest[t.join(',')] = shortest[t.join(',')] ? Math.min(d, shortest[t.join(',')]) : d
+  }
+  for (var j = 0; j < layout.length; j++) {
+    radii.push(shortest[layout[j].join(',')])
+  }
+  return radii;
 }
