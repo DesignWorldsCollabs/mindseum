@@ -19,30 +19,33 @@
         </feComponentTransfer>
         <feBlend mode="normal" in="opaqueBlur" in2="SourceGraphic"/>
       </filter>
+      {{with this.radius as #r}}
       {{each beads}}
         <pattern
           id="{{this.id}}"
           patternUnits="userSpaceOnUse"
           patternContentUnits="objectBoundingBox"
-          x="{{this.cx - this.r}}"
-          y="{{this.cy - this.r}}"
-          width="{{2 * this.r}}"
-          height="{{2 * this.r}}">
+          x="{{this.cx - #r}}"
+          y="{{this.cy - #r}}"
+          width="{{2 * #r}}"
+          height="{{2 * #r}}">
           <rect x="0" y="0" width="1" height="1" fill="white" />
           <image xlink:href="/img/{{this.id}}.jpg" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>
         </pattern>
         <clipPath id="{{this.id}}-clip">
-          <circle cx="{{this.cx}}" cy="{{this.cy}}" r="{{this.r}}">
+          <circle cx="{{this.cx}}" cy="{{this.cy}}" r="{{#r}}">
           </circle>
         </clipPath>
       {{/each}}
+      {{/with}}
     </defs>
+    {{with this.radius as #r}}
     {{each beads}}
       <circle
         class="{{this.active}} {{this.hover}} transition"
         cx="{{this.cx}}"
         cy="{{this.cy}}"
-        r="{{this.r}}"
+        r="{{#r}}"
         fill="url(#{{this.id}})"
         filter="url(#blurry)"
         clip-path="url(#{{this.id}}-clip" />
@@ -55,4 +58,5 @@
         stroke="#EEE"
         stroke-width="1" />
     {{/each}}
+    {{/with}}
   </svg>

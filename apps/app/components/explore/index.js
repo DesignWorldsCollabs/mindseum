@@ -78,12 +78,12 @@ Explore.prototype.draw = function () {
       id: beadIds[i],
       cx: layout[i][0],
       cy: layout[i][1],
-      r: radius,
       p: polygons[i],
       active: this.model.get('beads.' + i + '.active')
     })
   }
   this.model.setDiff('beads', beads);
+  this.model.setDiff('radius', radius);
 }
 
 Explore.prototype.defaultLayout = function () {
