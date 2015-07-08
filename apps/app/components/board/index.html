@@ -8,8 +8,6 @@
    preserveAspectRatio="xMidYMid meet">
     <defs>
       <style>
-        .transition { opacity: 1; transition: opacity 0.4s ease-out }
-        .active { opacity: 0.5 }
         .hover, .active { filter: none }
       </style>
 
@@ -44,7 +42,7 @@
     {{with connections as #connections}}
     {{each beads}}
     <circle
-      class="{{active(#connections, this.id)}} {{hovered(hover, this.id)}} transition"
+      class="{{active(#connections, this.id)}} {{hovered(hover, this.id)}}"
       cx="{{this.cx}}"
       cy="{{this.cy}}"
       r="{{this.r}}"

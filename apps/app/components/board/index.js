@@ -96,10 +96,10 @@ Board.prototype.active = function (connections, beadId) {
 }
 
 Board.prototype.click = function (id) {
+  this.model.del('hover')
   this.model.set('preview', id);
   if (this.model.at('connections').get().indexOf(id) === -1)
     this.preview.show();
-    // document.getElementById(id + '-link').click();
 }
 
 Board.prototype.hovered = function (hover, id) {
