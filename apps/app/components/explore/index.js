@@ -53,10 +53,18 @@ Explore.prototype.mousemove = function (event) {
   console.log(this);
 }
 
-Explore.prototype.click = function (bead) {
-  if (!bead.get('active')) return bead.set('active', 'active');
-  bead.del('active');
-  bead.del('hover');
+Explore.prototype.url = function (id) {
+  return this.model.scope('$render.url').get() + '/' + id
+}
+
+Explore.prototype.active = function (beadId) {
+  if (this.model.scope('_page.connections').get().indexOf(beadId) !== -1) return 'active';
+  return '';
+}
+
+Explore.prototype.click = function (id) {
+  if (this.model.scope('_page.connections').get().indexOf(id) === -1)
+    document.getElementById(id + '-link').click();
 }
 
 Explore.prototype.mouseover = function (bead) {
@@ -79,7 +87,6 @@ Explore.prototype.draw = function () {
       cx: layout[i][0],
       cy: layout[i][1],
       p: polygons[i],
-      active: this.model.get('beads.' + i + '.active')
     })
   }
   this.model.setDiff('beads', beads);
@@ -103,6 +110,10 @@ Explore.prototype.defaultLayout = function () {
       }
     }
   }
+  layout.push([
+    (center + 0.5) * gridX,
+    (center + 0.5) * gridY
+  ])
   return layout;
 }
 

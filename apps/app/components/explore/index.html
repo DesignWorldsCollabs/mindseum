@@ -42,7 +42,7 @@
     {{with this.radius as #r}}
     {{each beads}}
       <circle
-        class="{{this.active}} {{this.hover}} transition"
+        class="{{active(this.id)}} {{this.hover}} transition"
         cx="{{this.cx}}"
         cy="{{this.cy}}"
         r="{{#r}}"
@@ -52,7 +52,7 @@
       <polygon
         points="{{this.p}}"
         fill-opacity="0"
-        on-click="click($at(this))"
+        on-click="click(this.id)"
         on-mouseover="mouseover($at(this))"
         on-mouseout="mouseout($at(this))"
         stroke="#EEE"
@@ -60,3 +60,6 @@
     {{/each}}
     {{/with}}
   </svg>
+  {{each beads}}
+    <a id="{{this.id}}-link" href="{{url(this.id)}}" style="display:none"></a>
+  {{/each}}

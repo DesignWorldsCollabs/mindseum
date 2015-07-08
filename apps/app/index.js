@@ -17,10 +17,17 @@ app.loadStyles(__dirname + '/styles');
 
 app.get('home', '/');
 
-app.get('explore', '/explore/:connections*');
+app.get('explore', '/explore/:connections*', ['connections']);
 app.get('collect', '/collect');
 app.get('associate', '/associate');
 
 app.get('login', '/login');
 app.get('register', '/register');
 
+app.module('connections', {
+  load: function () {
+    var connections = this.params.connections;
+    connections = (connections ? connections.split('/') : []);
+    this.model.set('_page.connections', connections);
+  }
+})
