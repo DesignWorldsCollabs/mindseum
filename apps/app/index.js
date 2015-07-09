@@ -3,6 +3,8 @@ var derby = require('derby');
 var app = module.exports = derby.createApp('app', __filename);
 
 
+app.component(require('d-connection-alert'));
+app.component(require('d-before-unload'));
 app.use(require('d-bootstrap'));
 app.use(require('derby-login/components'));
 app.use(require('derby-router'));
