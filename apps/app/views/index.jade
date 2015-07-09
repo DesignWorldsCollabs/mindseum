@@ -30,11 +30,11 @@ header:
         a.navbar-brand(href="/") Mindseum
       collapse.navbar-collapse(as="navbarCollapse")
         ul.nav.navbar-nav
-          li.active
+          li(class="{{if $render.ns === 'explore'}}active{{/if}}")
             a(href="/explore/default-board") Explore
-          li
+          li(class="{{if $render.ns === 'collect'}}active{{/if}}")
             a(href="/collect") Collect
-          li
+          li(class="{{if $render.ns === 'associate'}}active{{/if}}")
             a(href="/associate") Associate
 
         ul.nav.navbar-nav.navbar-right
