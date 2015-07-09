@@ -14,13 +14,13 @@ Title:
   | {{_page.title}}
 
 Body:
-  view(is="d-connection-alert")
-  view(is="d-before-unload")
   view(is="header")
   view(is="{{$render.ns}}")
   view(is="footer")
 
 header:
+  view(is="d-connection-alert")
+  view(is="d-before-unload")
   nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
     div.container-fluid
       div.navbar-header
