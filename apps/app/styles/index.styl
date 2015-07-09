@@ -13,3 +13,22 @@ nav + .container-fluid
 .starter-template
   padding: 40px 15px
   text-align: center
+
+.tall
+  height 100%
+  &.container-fluid
+    margin-top 0
+  &.scrollable
+    padding-top 20px
+    overflow-y scroll
+  &.scrollable + .tall
+    padding-left 0
+
+.clipping-box
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 0 15px;
+  border-style: solid;
+  margin: 0 0 15px auto;

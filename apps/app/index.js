@@ -21,7 +21,7 @@ app.get('home', '/');
 
 app.get('explore', '/explore/:boardId/:connections*', ['board', 'connections']);
 app.get('collect', '/collect');
-app.get('associate', '/associate');
+app.get('associate', '/associate/:boardId/:connections*', ['board', 'connections']);
 
 app.get('login', '/login');
 app.get('register', '/register');
