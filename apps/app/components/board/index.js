@@ -76,8 +76,26 @@ Board.prototype.init = function (model) {
 }
 
 Board.prototype.create = function (model, dom) {
+  dom.on('touchstart', this.svg, this.touch.bind(this));
+  dom.on('touchmove', this.svg, this.touch.bind(this));
+  dom.on('touchend', this.svg, this.touch.bind(this));
   dom.on('resize', window, this.resize.bind(this));
   this.resize();
+}
+
+Board.prototype.touch = function (evt) {
+  if (evt.preventDefault) evt.preventDefault();
+  if (evt.type === 'touchend' && this.touchId) {
+    this.click(this.touchId);
+    delete this.touchId;
+  }
+  if (evt.type === 'touchend') return this.model.del('hover');
+  var x = evt.touches[0].clientX;
+  var y = evt.touches[0].clientY;
+  var el = document.elementFromPoint(x, y);
+  if (el && el.id) this.touchId = el.id;
+  if (this.touchId) return this.model.set('hover', el.id);
+  this.model.del('hover');
 }
 
 Board.prototype.resize = function () {

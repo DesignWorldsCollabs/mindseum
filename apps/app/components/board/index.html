@@ -22,7 +22,7 @@
 
       {{each patterns}}
         <pattern
-          id="{{this.id}}"
+          id="{{this.id}}-pattern"
           patternUnits="userSpaceOnUse"
           patternContentUnits="objectBoundingBox"
           x="{{this.x}}"
@@ -43,7 +43,7 @@
       cx="{{this.cx}}"
       cy="{{this.cy}}"
       r="{{this.r}}"
-      fill="url(#{{this.id}})"
+      fill="url(#{{this.id}}-pattern)"
       filter="url(#blurry)" />
     {{/each}}
     {{/with}}
@@ -51,6 +51,7 @@
 
     {{each polygons}}
     <polygon
+      id="{{this.id}}"
       points="{{this.points}}"
       fill-opacity="0"
       on-click="click(this.id)"
