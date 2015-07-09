@@ -100,8 +100,9 @@ Board.prototype.touch = function (evt) {
 
 Board.prototype.resize = function () {
   if (!this.svg) return;
-  this.model.set('width', this.svg.clientWidth);
-  this.model.set('height', this.svg.clientHeight);
+  var rect = this.svg.getBoundingClientRect();
+  this.model.set('width', rect.width);
+  this.model.set('height', rect.height);
 }
 
 Board.prototype.url = function (id) {
