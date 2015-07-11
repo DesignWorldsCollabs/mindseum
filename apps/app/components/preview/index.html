@@ -5,7 +5,7 @@
     on-click="hide('backdrop')">
     <div class="modal-dialog" style="margin: 10vh auto; width: {{width}}px">
       <div class="modal-content">
-        <a href="{{@href}}">
+        <a href="{{@href}}" class="connect connect-{{#root.$render.ns}}">
           <img as="img" src="{{@src}}" style="max-width: 60vw; max-height: 80vh" />
         </a>
       </div>
