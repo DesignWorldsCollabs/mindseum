@@ -17,14 +17,26 @@ app.serverUse(module, 'derby-markdown');
 app.loadViews(__dirname + '/views');
 app.loadStyles(__dirname + '/styles');
 
-app.get('home', '/');
+app.get('home', '/', ['user']);
 
-app.get('explore', '/explore/:boardId/:connections*', ['board', 'connections']);
-app.get('collect', '/collect');
-app.get('associate', '/associate/:boardId/:connections*', ['board', 'connections']);
+app.get('explore', '/explore/:boardId/:connections*', ['user', 'board', 'connections']);
+app.get('collect', '/collect', ['user']);
+app.get('associate', '/associate/:boardId/:connections*', ['user', 'board', 'connections']);
 
 app.get('login', '/login');
 app.get('register', '/register');
+
+app.module('user', {
+  load: function load() {
+    var loggedIn = this.model.get('_session.loggedIn');
+    var userId = this.model.get('_session.userId');
+    this.scope = this.model.scope('users').at(userId)
+    if (loggedIn) this.addSubscriptions(this.scope);
+  },
+  setup: function setup() {
+    this.model.ref('_session.user', this.scope);
+  }
+})
 
 app.module('connections', {
   load: function load() {

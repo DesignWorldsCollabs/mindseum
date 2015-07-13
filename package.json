@@ -23,7 +23,7 @@
     "derby": "0.6.0-alpha45",
     "derby-debug": "^0.1.0",
     "derby-jade": "^0.6.17",
-    "derby-login": "wenzowski/derby-login#feature/redirects",
+    "derby-login": "wenzowski/derby-login",
     "derby-markdown": "^0.1.0",
     "derby-router": "^0.3.3",
     "derby-stylus": "^0.1.0",

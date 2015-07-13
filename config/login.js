@@ -5,7 +5,7 @@ module.exports = {
   publicCollection: 'users',
   user: {
     id: true,
-    email: true
+    name: true
   },
   confirmRegistration: false,
   // passportjs options

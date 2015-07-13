@@ -47,6 +47,9 @@ header:
             li
               a(href="/login?redirect={{$render.url === '/' ? '/collect' : $render.url}}") Login
 
+        if _session.loggedIn && _session.user.name
+          p.nav.navbar-text.navbar-right {{_session.user.name}}
+
 footer:
   div.container-fluid
     hr
