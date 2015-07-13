@@ -42,10 +42,10 @@ header:
         ul.nav.navbar-nav.navbar-right
           if _session.loggedIn
             li
-              a(href="/auth/logout") Logout
+              a(href="/auth/logout?redirect=/") Logout
           else
             li
-              a(href="/login") Login
+              a(href="/login?redirect={{$render.url === '/' ? '/collect' : $render.url}}") Login
 
 footer:
   div.container-fluid

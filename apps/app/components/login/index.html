@@ -1,0 +1,26 @@
+<index:>
+
+  <form role="form" on-submit="submit()">
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" value="{{email}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <div class="input-group">
+        <input type="{{if showPassword}}text{{else}}password{{/if}}" id="password" class="form-control" value="{{password}}" />
+        <span class="input-group-btn">
+          <label class="btn btn-default">
+            <input type="checkbox" checked="{{showPassword}}"> show
+          </label>
+        </span>
+      </div>
+    </div>
+
+    <p class="text-danger">{{error}}</p>
+
+    <input type="submit" class="btn btn-primary btn-block" value="Login" disabled="{{error || sending}}" />
+
+  </form>
