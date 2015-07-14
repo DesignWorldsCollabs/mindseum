@@ -6,11 +6,16 @@ Url.prototype.name = 'url';
 Url.prototype.view = __dirname;
 
 Url.prototype.create = function () {
+  this.model.on('change', 'url', this.change.bind(this));
   this.on('validated', this.collect.bind(this));
 }
 
+Url.prototype.change = function () {
+  this.model.del('suggested');
+  this.model.del('valid');
+}
+
 Url.prototype.submit = function () {
-  this.model.set('collect', true);
   if (this.model.get('suggested')) return this.correct();
   if (this.model.get('valid') === true) return this.collect();
   this.validate();
@@ -20,7 +25,6 @@ Url.prototype.validate = function () {
   if (this.req) this.req.abort()
   this.model.del('validating')
   this.model.del('error');
-  this.model.del('collect');
   if ((this.model.get('url') || '').length === 0) return this.req = null;
   this.model.set('validating', true)
   this.req = request.head(this.path()).end(this.onValidation.bind(this));
@@ -42,12 +46,10 @@ Url.prototype.correct = function (shortcut) {
   this.model.setDiff('url', this.model.del('suggested'));
   this.model.set('valid', true);
   if (!shortcut) return;
-  this.model.set('collect', true);
   this.collect();
 }
 
 Url.prototype.collect = function () {
-  if (!this.model.del('collect')) return
   this.model.del('error');
   this.model.del('valid');
   this.emit('collect', this.model.del('url'));
