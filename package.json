@@ -25,7 +25,7 @@
     "derby-jade": "^0.6.17",
     "derby-login": "wenzowski/derby-login",
     "derby-markdown": "^0.1.0",
-    "derby-router": "^0.3.3",
+    "derby-router": "wenzowski/derby-router",
     "derby-stylus": "^0.1.0",
     "express": "^4.13.1",
     "express-session": "^1.11.3",
@@ -37,6 +37,7 @@
     "redis-url": "^1.2.0",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
+    "superagent": "^1.2.0",
     "yamlify": "^0.1.2"
   },
   "author": {

@@ -9,6 +9,7 @@ app.use(require('d-bootstrap'));
 app.use(require('derby-login/components'));
 app.use(require('derby-router'));
 app.use(require('derby-debug'));
+app.use(require('./api'));
 app.use(require('./components'));
 app.use(require('./modules'));
 app.serverUse(module,'derby-jade');
@@ -21,8 +22,15 @@ app.loadStyles(__dirname + '/styles');
 app.get('home', '/', ['user']);
 
 app.get('explore', '/explore/:boardId/:connections*', ['user', 'board', 'connections']);
-app.get('collect', '/collect', ['user']);
+app.get('collect', '/collect', ['user', 'clippings']);
 app.get('associate', '/associate/:boardId/:connections*', ['user', 'board', 'connections']);
 
 app.get('login', '/login');
 app.get('register', '/register');
+
+app.proto.newClipping = function newClipping(url) {
+  this.model.add('clippings', {
+    userId: this.model.get('_session.userId'),
+    url: url
+  })
+}

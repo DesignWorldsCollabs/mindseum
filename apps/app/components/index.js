@@ -3,4 +3,5 @@ module.exports = function(app, options) {
   app.component(require('./preview'));
   app.component(require('./register'));
   app.component(require('./login'));
+  app.component(require('./url'));
 };

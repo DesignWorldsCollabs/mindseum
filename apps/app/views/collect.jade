@@ -1,5 +1,10 @@
-index:
+Body:
+  view(is="header")
   div.container-fluid
-    div.starter-template
-      h1 Bootstrap starter template
-      p.lead Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.
+    div.row
+      div.col-xs-12
+        view(is="url" on-collect="newClipping()")
+    each _page.clippings
+      div.row
+        div.col-xs-12
+          | {{this.url}}
