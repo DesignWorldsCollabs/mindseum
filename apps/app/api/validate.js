@@ -7,21 +7,22 @@ module.exports = validate;
 function validate(req, res, next) {
   var method = 'HEAD';
   var timeout = 8000;
+  var redirects = 5;
+  var agent = request.agent();
   if (/^http/.test(req.query.url) === false) req.query.url = 'http://' + req.query.url
-  request.head(req.query.url).timeout(timeout).end(onResponse);
+  res.set('Queried-URL', req.query.url);
+  agent.head(req.query.url).timeout(timeout).end(onResponse);
   function onResponse(err, response) {
-    res.append('Queried-URL', req.query.url);
     if (((response || {}).header || {}).location) {
+      if (!redirects) return res.sendStatus(500);
+      redirects--;
       var query = url.parse(req.query.url)
-      var redirect = url.parse(response.header.location)
-      var protocol = redirect.protocol || query.protocol;
-      var host = redirect.host || query.host;
-      var path = getPath(protocol, host, redirect.path);
-      res.location((process.env.PROTOCOL || req.protocol) + '://' + req.get('host') + path);
+      res.set('Queried-URL', response.header.location);
+      return agent.head(response.header.location).timeout(timeout).end(onResponse);
     }
     if (err && err.status === 405 && method === 'HEAD') {
       method = 'GET';
-      return request.get(req.query.url).timeout(timeout).end(onResponse);
+      return agent.get(req.query.url).timeout(timeout).end(onResponse);
     }
     if (err && err.status) return res.sendStatus(err.status)
     if (err) return res.sendStatus(500)
