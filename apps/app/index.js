@@ -27,10 +27,3 @@ app.get('associate', '/associate/:boardId/:connections*', ['user', 'board', 'con
 
 app.get('login', '/login');
 app.get('register', '/register');
-
-app.proto.newClipping = function newClipping(url) {
-  this.model.add('clippings', {
-    userId: this.model.get('_session.userId'),
-    url: url
-  })
-}
