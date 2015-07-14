@@ -5,6 +5,7 @@
         <view is="url" on-collect="newClipping()" />
       </div>
     </div>
+    {{if #root._page.clippings}}
     <div class="row">
       <div class="col-xs-12">
         <div class="list-group">
@@ -14,4 +15,14 @@
         </div>
       </div>
     </div>
+    {{else}}
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4 starter-template">
+        <h1>
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </h1>
+        <p class="lead">Add your own link to the Mindseum</p>
+      </div>
+    </div>
+    {{/if}}
   </div>
