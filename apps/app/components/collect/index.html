@@ -9,7 +9,7 @@
       <div class="col-xs-12">
         <div class="list-group">
           {{each #root._page.clippings}}
-          <view is="clipping" clipping="{{this}}" />
+          <view is="clipping" clipping="{{this}}" url="/collect/{{this.id}}" />
           {{/each}}
         </div>
       </div>

@@ -8,7 +8,6 @@ Url.prototype.view = __dirname;
 Url.prototype.create = function () {
   this.model.on('all', 'url', this.invalidate.bind(this))
   this.on('validated', this.collect.bind(this));
-  this.input.focus();
 }
 
 Url.prototype.blur = function () {

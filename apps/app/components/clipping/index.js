@@ -12,9 +12,7 @@ Clipping.prototype.init = function () {
 
 Clipping.prototype.parsed = function () {
   if (this._parsed) return this._parsed;
-  return this._parsed = url.parse(this.model.get('clipping.url'));
-}
-
-Clipping.prototype.rm = function (id) {
-  this.model.scope('clippings').del(id);
+  var u = this.model.get('clipping.url');
+  if (typeof u !== 'string' || u.length < 1) return {hostname: '', pathname: ''};
+  return this._parsed = url.parse(u);
 }

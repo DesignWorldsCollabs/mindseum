@@ -1,6 +1,55 @@
 <index:>
-  <a href="{{clipping.url}}" class="list-group-item">
-    <span class="label label-danger pull-right" on-click="rm(clipping.id)">x</span>
-    {{if title}}<h4 class="list-group-item-heading">{{title}}</h4>{{/if}}
-    <p class="list-group-item-text">{{hostname}}{{pathname}}</p>
-  </a>
+  {{if $controller.page.params.clippingId === clipping.id}}
+    <div class="list-group-item">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" class="form-control" value="{{clipping.title}}">
+      </div>
+      <div class="form-group">
+        <label for="summary">Summary</label>
+        <textarea id="summary" class="form-control" rows=3>
+          {{clipping.summary}}
+        </textarea>
+      </div>
+      <div class="form-group prettylink">
+        <a href="{{clipping.url}}" target="_blank" class="list-group-item-text">
+          {{hostname}}{{pathname}}
+        </a>
+      </div>
+      <form class="form-group" action="/collect/{{clipping.id}}" method="post">
+        <a href="/collect" class="btn btn-primary" role="button">Save</a>
+        <a href="/collect" class="btn btn-link" role="button">cancel</a>
+        <button type="submit" class="btn btn-link pull-right" style="color:#d43f3a">
+          delete
+        </button>
+      </form>
+    </div>
+  {{else if $controller.page.params.clippingId}}
+    <div class="list-group-item disabled">
+      {{if clipping.title}}<h4 class="list-group-item-heading">{{clipping.title}}</h4>{{/if}}
+      {{if clipping.summary}}<p class="list-group-item-text">{{clipping.summary}}</p>{{/if}}
+      <p class="list-group-item-text prettylink">
+        {{hostname}}{{pathname}}
+      </p>
+    </div>
+  {{else}}
+    <a href="{{@url || clipping.url}}" class="list-group-item">
+      {{if clipping.title}}
+        <h4 class="list-group-item-heading">
+          {{clipping.title}}<br />
+        </h4>
+      {{/if}}
+      {{if clipping.summary}}
+        <p class="list-group-item-text">
+          {{clipping.summary}}
+        </p>
+      {{/if}}
+      <p class="list-group-item-text prettylink">
+        {{if clipping.summary}}
+          <small>{{hostname}}{{pathname}}</small>
+        {{else}}
+          {{hostname}}{{pathname}}
+        {{/if}}
+      </p>
+    </a>
+  {{/if}}

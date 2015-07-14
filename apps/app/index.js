@@ -23,6 +23,11 @@ app.get('home', '/', ['user']);
 
 app.get('explore', '/explore/:boardId/:connections*', ['user', 'board', 'connections']);
 app.get('collect', '/collect', ['user', 'clippings']);
+app.get('collect:clipping:show', '/collect/:clippingId', ['user', 'clippings']);
+app._post('/collect/:clippingId', function deleteClipping(page, model, params, next) {
+  model.at('clippings').del(this.params.clippingId)
+  page.redirect('/collect');
+});
 app.get('associate', '/associate/:boardId/:connections*', ['user', 'board', 'connections']);
 
 app.get('login', '/login');
