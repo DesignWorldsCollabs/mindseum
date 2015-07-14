@@ -1,23 +1,24 @@
 <index:>
   <form role="form" on-submit="submit()">
-    <div class="form-group {{if error}}has-error has-feedback{{/if}}">
-      <div class="input-group">
+    <div class="form-group {{if error}}has-error{{/if}} {{if suggested}}has-warning{{/if}} has-feedback has-feedback-left">
+      <div class="input-group inner-addon left-addon">
         <input
           as="input"
           type="text"
           class="form-control"
-          placeholder="https://"
           value="{{url}}"
-          on-blur="blur()"
           autofocus />
+        <span class="glyphicon glyphicon-file form-control-feedback"></span>
         <span class="input-group-btn">
           <button
             type="submit"
             class="btn btn-default {{if error}}btn-danger{{/if}}"
             disabled="{{error || validating}}">
-            Collect
+            <span class="glyphicon glyphicon-triangle-right"></span>
           </button>
         </span>
       </div>
+      {{if error}}<p class="help-block">There doesn't seem to be anything there. Are you sure you got that right?</p>{{/if}}
+      {{if suggested}}<p class="help-block">Did you mean: <a on-click="correct('autosubmit')">{{suggested}}</a></p>{{/if}}
     </div>
   </form>

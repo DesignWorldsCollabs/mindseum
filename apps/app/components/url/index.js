@@ -6,16 +6,12 @@ Url.prototype.name = 'url';
 Url.prototype.view = __dirname;
 
 Url.prototype.create = function () {
-  this.model.on('all', 'url', this.invalidate.bind(this))
   this.on('validated', this.collect.bind(this));
-}
-
-Url.prototype.blur = function () {
-  this.validate();
 }
 
 Url.prototype.submit = function () {
   this.model.set('collect', true);
+  if (this.model.get('suggested')) return this.correct();
   if (this.model.get('valid') === true) return this.collect();
   this.validate();
 }
@@ -23,7 +19,8 @@ Url.prototype.submit = function () {
 Url.prototype.validate = function () {
   if (this.req) this.req.abort()
   this.model.del('validating')
-  this.invalidate();
+  this.model.del('error');
+  this.model.del('collect');
   if ((this.model.get('url') || '').length === 0) return this.req = null;
   this.model.set('validating', true)
   this.req = request.head(this.path()).end(this.onValidation.bind(this));
@@ -36,15 +33,17 @@ Url.prototype.onValidation = function (err, res) {
     return this.model.set('error', true);
   }
   var url = res.header['queried-url'];
+  if (this.model.get('url') !== url) return this.model.set('suggested', url)
   this.model.set('valid', true);
-  if (this.model.get('url') !== url) return this.model.pass({silent: true}).setDiff('url', url);
   this.emit('validated');
 }
 
-Url.prototype.invalidate = function (type, val, prev, passed) {
-  if (passed && passed.silent) return;
-  this.model.del('error');
-  this.model.del('valid');
+Url.prototype.correct = function (shortcut) {
+  this.model.setDiff('url', this.model.del('suggested'));
+  this.model.set('valid', true);
+  if (!shortcut) return;
+  this.model.set('collect', true);
+  this.collect();
 }
 
 Url.prototype.collect = function () {
