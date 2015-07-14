@@ -106,7 +106,11 @@ Board.prototype.resize = function () {
 }
 
 Board.prototype.url = function (id) {
-  return this.model.scope('$render.url').get() + '/' + id
+  return this.app.pathFor(this.model.root.get('$render.ns'), {
+    boardId: this.model.root.get('_page.board.id'),
+    offset: this.model.root.get('_page.offset'),
+    connections: this.connect(this.model.root.get('_page.connections'),id)
+  });
 }
 
 Board.prototype.active = function (connections, beadId) {
@@ -132,4 +136,10 @@ Board.prototype.mouseover = function (id) {
 
 Board.prototype.mouseout = function (id) {
   this.model.del('hover')
+}
+
+Board.prototype.connect = function (connections, id) {
+  connections = (connections || []).slice();
+  connections.push(id);
+  return connections;
 }

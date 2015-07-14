@@ -1,0 +1,47 @@
+<Body:>
+  <view is="header" />
+  <view is="associate"/>
+  <view is="preview:backdrop" />
+
+<index:>
+  <div class="container-fluid">
+    <div class="row">
+      {{if #root._page.clippings}}
+      <div class="col-xs-1">
+        {{if prevOffset(offset)}}
+        <a class="btn btn-link btn-large" href="{{pathFor('associate:clip',{boardId: #root._page.board.id, offset: prevOffset(offset), connections: #root._page.connections})}}">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col-xs-10">
+        <div class="list-group">
+          <view is="clipping" clipping="{{clippings[offset]}}" />
+        </div>
+      </div>
+      <div class="col-xs-1" style="text-align:right">
+        {{if nextOffset(offset)}}
+        <a class="btn btn-link btn-large" href="{{pathFor('associate:clip',{boardId: #root._page.board.id, offset: nextOffset(offset), connections: #root._page.connections})}}">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col-xs-12">
+        <view is="board" layout="{{#root._page.board}}" connections="{{#root._page.connections}}" />
+      </div>
+      {{else}}
+      <div class="starter-template">
+        <h1>
+          <span class="glyphicon glyphicon-education"></span>
+        </h1>
+        <p class="lead">
+          Associate your own <a href="/collect">collection of resources</a> in the Mindseum
+          <br />
+          <small>
+            make sure to add a title and a summary to each
+          </small>
+        </p>
+      </div>
+      {{/if}}
+    </div>
+  </div>

@@ -1,4 +1,5 @@
 module.exports = function(app, options) {
+  app.component(require('./associate'));
   app.component(require('./board'));
   app.component(require('./clipping'));
   app.component(require('./collect'));

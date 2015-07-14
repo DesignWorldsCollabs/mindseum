@@ -28,7 +28,20 @@ app._post('/collect/:clippingId', function deleteClipping(page, model, params, n
   model.at('clippings').del(this.params.clippingId)
   page.redirect('/collect');
 });
-app.get('associate', '/associate/:boardId/:connections*', ['user', 'board', 'connections']);
+app.get('associate:clip', '/c/:offset/:boardId/:connections*', [
+  'offset',
+  'user',
+  'board',
+  'associatableClippings',
+  'connections'
+]);
+app.get('associate', '/associate/:boardId/:connections*', [
+  'offset',
+  'user',
+  'board',
+  'associatableClippings',
+  'connections'
+]);
 
 app.get('login', '/login');
 app.get('register', '/register');

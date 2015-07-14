@@ -5,6 +5,7 @@ function Collect() {}
 Collect.prototype.name = 'collect';
 Collect.prototype.view = __dirname;
 
+// TODO this should be a route so it can redirect
 Collect.prototype.newClipping = function (url) {
   this.model.root.add('clippings', {
     userId: this.model.root.get('_session.userId'),
