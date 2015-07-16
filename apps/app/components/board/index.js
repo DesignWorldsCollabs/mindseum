@@ -8,12 +8,14 @@ Board.prototype.view = __dirname;
 Board.prototype.init = function (model) {
   this.model.setNull('width', this.model.get('layout.width'));
   this.model.setNull('height', this.model.get('layout.height'));
+  this.model.setNull('activeBeads', this.model.get('layout.beads'));
   this.model.start('stretch', 'width', 'height', 'layout.width', 'layout.height', calculateStretch);
-  this.model.start('points', 'stretch', 'layout.beads', pluckPoints);
-  this.model.start('radius', 'points', calculateRadius);
-  this.model.start('beads', 'points', 'radius', 'layout.beads', drawBeads);
+  this.model.start('allPoints', 'stretch', 'layout.beads', pluckPoints);
+  this.model.start('points', 'stretch', 'activeBeads', pluckPoints);
+  this.model.start('radius', 'allPoints', calculateRadius);
+  this.model.start('beads', 'points', 'radius', 'activeBeads', drawBeads);
   this.model.start('patterns', 'beads', drawPatterns);
-  this.model.start('polygons', 'width', 'height', 'points', 'layout.beads', drawPolygons);
+  this.model.start('polygons', 'width', 'height', 'points', 'activeBeads', drawPolygons);
   function calculateStretch(w, h, lw, lh) {
     return {
       x: w / lw,

@@ -23,7 +23,7 @@ app.loadStyles(__dirname + '/styles');
 app.get('home', '/', ['user']);
 
 app.get('explore', '/explore/:boardId/:connections*', [
-  'user', 'board', 'connections'
+  'user', 'board', 'connections', 'beads'
 ]);
 app.get('collect', '/collect', [
   'user', 'clippings'
