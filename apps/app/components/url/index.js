@@ -21,6 +21,14 @@ Url.prototype.submit = function () {
   this.validate();
 }
 
+Url.prototype.focus = function () {
+  this.model.set('focused', 'focused');
+}
+
+Url.prototype.blur = function () {
+  if ((this.model.get('url') || '').length === 0) this.model.del('focused');
+}
+
 Url.prototype.validate = function () {
   if (this.req) this.req.abort()
   this.model.del('validating')

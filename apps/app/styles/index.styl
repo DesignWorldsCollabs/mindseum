@@ -2,7 +2,7 @@ html, body
   height 100%
 
 body
-  padding-top 50px
+  padding-top 64px
 
 nav + .container-fluid
   margin-top 20px
@@ -77,3 +77,28 @@ a.connect-explore::before
   .form-control-feedback
     left 0
     right initial
+
+h4.list-group-item-heading
+  font-size 16px
+  font-weight normal
+  margin-bottom 2px
+
+.list-group-item-text.summary
+  color #555
+  margin-bottom 2px
+
+.form-group.floatlabel
+  margin-top -16px
+
+label.floatlabel
+  font-size 16px
+  position relative
+  top 16px
+  transition 240ms
+  transform-origin left top
+  transform translate3d(0, 22px, 0) scale(1)
+  opacity 0.4
+
+  &.focused
+    transform scale(0.75)
+    opacity 1

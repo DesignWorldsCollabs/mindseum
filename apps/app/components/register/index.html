@@ -1,36 +1,43 @@
 <index:>
+  <h2 style="text-align:center">Mindseum</h2>
 
   <form role="form" on-submit="submit()">
 
-    <div class="form-group">
-      <label for="display-name">Full Name</label>
-      <input type='text' id="display-name" class="form-control" value="{{name}}" on-focus="focus('name')" on-blur="blur('name')" />
-      <p class="help-block" style="display:{{display($at(focus.name))}}">
-        We'd like to attribute your wonderful contributions to you.
-      </p>
+    <div class="form-group floatlabel">
+      <label for="display-name" class="floatlabel {{nameFocused}}">Full Name</label>
+      <floatlabel
+        type="text"
+        id="display-name"
+        class="form-control"
+        value="{{name}}"
+        focused="{{nameFocused}}" />
     </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" class="form-control" value="{{email}}" on-focus="focus('email')" on-blur="blur('email')" />
-      <p class="help-block" style="display:{{display($at(focus.email))}}">
-        We promise to never spam you. Cross our hearts!
-      </p>
+    <div class="form-group floatlabel">
+      <label for="email" class="floatlabel {{emailFocused}}">Email</label>
+      <floatlabel
+        type="email"
+        id="email"
+        class="form-control"
+        value="{{email}}"
+        focused="{{emailFocused}}" />
     </div>
 
-    <div class="form-group">
-      <label for="password">Password</label>
+    <div class="form-group floatlabel">
+      <label for="password" class="floatlabel {{passwordFocused}}">Password</label>
       <div class="input-group">
-        <input type="{{if showPassword}}text{{else}}password{{/if}}" id="password" class="form-control" value="{{password}}" on-focus="focus('password')" on-blur="blur('password')" />
+        <floatlabel
+          type="{{if showPassword}}text{{else}}password{{/if}}"
+          id="password"
+          class="form-control"
+          value="{{password}}"
+          focused="{{passwordFocused}}" />
         <span class="input-group-btn">
-          <label class="btn btn-default">
+          <label class="btn btn-link">
             <input type="checkbox" checked="{{showPassword}}"> show
           </label>
         </span>
       </div>
-      <p class="help-block" style="display:{{display($at(focus.password))}}">
-        Weak passwords make us cry. Please chose a strong password.
-      </p>
     </div>
 
     <p class="text-danger">{{error}}</p>

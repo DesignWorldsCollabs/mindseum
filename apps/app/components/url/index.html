@@ -1,18 +1,19 @@
 <index:>
   <form role="form" on-submit="submit()">
-    <div class="form-group {{if error}}has-error{{/if}} {{if suggested}}has-warning{{/if}} has-feedback has-feedback-left">
-      <div class="input-group inner-addon left-addon">
-        <input
+    <div class="form-group floatlabel{{if error}} has-error{{/if}}{{if suggested}} has-warning{{/if}}">
+      <label for="url" class="floatlabel {{focused}}">Type URL</label>
+      <div class="input-group">
+        <floatlabel
           as="input"
           type="text"
+          id="url"
           class="form-control"
-          value="{{url}}"
-          autofocus />
-        <span class="glyphicon glyphicon-file form-control-feedback"></span>
+          focused="{{focused}}"
+          value="{{url}}" />
         <span class="input-group-btn">
           <button
             type="submit"
-            class="btn btn-default {{if error}}btn-danger{{/if}}"
+            class="btn btn-primary {{if error}}btn-danger{{/if}}"
             disabled="{{validating}}">
             <span class="glyphicon glyphicon-triangle-right"></span>
           </button>
