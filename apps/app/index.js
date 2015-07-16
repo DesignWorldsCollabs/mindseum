@@ -2,10 +2,9 @@ var derby = require('derby');
 
 var app = module.exports = derby.createApp('app', __filename);
 
-
 app.component(require('d-connection-alert'));
 app.component(require('d-before-unload'));
-app.use(require('d-bootstrap'));
+app.use(require('d-bootstrap'), {loadStyles: false});
 app.use(require('derby-login/components'));
 app.use(require('derby-router'));
 app.use(require('derby-debug'));
@@ -14,9 +13,11 @@ app.use(require('./components'));
 app.use(require('./modules'));
 app.serverUse(module,'derby-jade');
 app.serverUse(module, 'derby-stylus');
+app.serverUse(module, 'derby-less');
 app.serverUse(module, 'derby-markdown');
 
 app.loadViews(__dirname + '/views');
+app.loadStyles(__dirname + '/styles/bootstrap');
 app.loadStyles(__dirname + '/styles');
 
 app.get('home', '/', ['user']);
