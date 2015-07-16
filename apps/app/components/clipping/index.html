@@ -31,7 +31,7 @@
       </p>
     </div>
   {{else}}
-    <a href="{{@url || clipping.url}}" class="list-group-item">
+    <a href="{{@href}}" class="list-group-item clipping">
       {{if clipping.title}}
         <h4 class="list-group-item-heading">
           {{clipping.title}}<br />
@@ -49,5 +49,13 @@
           {{hostname}}{{pathname}}
         {{/if}}
       </p>
+      {{if @connections}}
+      <div class="connections">
+        <button class="action btn btn-link">Associate</button>
+        {{each @connections}}
+        <div class="connection" style="background-image: url(/img/{{this}}.jpg)"></div>
+        {{/each}}
+      </div>
+      {{/if}}
     </a>
   {{/if}}

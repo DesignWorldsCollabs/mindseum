@@ -4,7 +4,8 @@ module.exports.setup = setup
 function load() {
   var userId = this.model.get('_session.userId');
   this.query = this.model.query('clippings', {
-    userId: userId
+    userId: userId,
+    associations: {$exists: false}
   })
   this.addSubscriptions(this.query);
 }

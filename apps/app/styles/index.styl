@@ -59,11 +59,11 @@ a.connect:hover::before
   background-color #e6e6e6
   border-color #adadad
 
-a.connect-associate::before
-  content "Associate"
+// a.connect-associate::before
+  // content "Associate"
 
-a.connect-explore::before
-  content "Explore"
+// a.connect-explore::before
+  // content "Explore"
 
 .prettylink
   white-space nowrap
@@ -102,3 +102,21 @@ label.floatlabel
   &.focused
     transform scale(0.75)
     opacity 1
+
+.clipping
+  .connections
+    position absolute
+    top 15px
+    right 15px
+    &
+      height 53px
+    & .connection
+      display block
+      width 53px
+      border-radius 50%
+      background-size cover
+      background-position center
+    & .connection, & .action
+      height 53px
+      margin-left 15px
+      float right

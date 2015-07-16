@@ -35,7 +35,7 @@ header:
           li(class="{{if $render.ns === 'collect'}}active{{/if}}")
             a(href="/collect") Collect
           li(class="{{if $render.ns === 'associate'}}active{{/if}}")
-            a(href="/associate/default-board") Associate
+            a(href="{{pathFor('associate',{boardId: 'default-board', offset: '0', connections: []})}}") Associate
 
         ul.nav.navbar-nav.navbar-right
           if _session.loggedIn

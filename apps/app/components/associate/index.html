@@ -9,19 +9,23 @@
       {{if #root._page.clippings}}
       <div class="col-xs-1">
         {{if prevOffset(offset)}}
-        <a class="btn btn-link btn-large" href="{{pathFor('associate:clip',{boardId: #root._page.board.id, offset: prevOffset(offset), connections: #root._page.connections})}}">
+        <a class="btn btn-link btn-large" href="{{pathFor('associate',{boardId: #root._page.board.id, offset: prevOffset(offset), connections: #root._page.connections})}}">
           <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         {{/if}}
       </div>
       <div class="col-xs-10">
         <div class="list-group">
-          <view is="clipping" clipping="{{clippings[offset]}}" />
+          <view
+            is="clipping"
+            href="{{if #root._page.connections}}{{pathFor('associate:create',{boardId: #root._page.board.id, offset: offset+'', clippingId: clippings[offset].id, connections: #root._page.connections})}}{{/if}}"
+            clipping="{{clippings[offset]}}"
+            connections="{{#root._page.connections}}" />
         </div>
       </div>
       <div class="col-xs-1" style="text-align:right">
         {{if nextOffset(offset)}}
-        <a class="btn btn-link btn-large" href="{{pathFor('associate:clip',{boardId: #root._page.board.id, offset: nextOffset(offset), connections: #root._page.connections})}}">
+        <a class="btn btn-link btn-large" href="{{pathFor('associate',{boardId: #root._page.board.id, offset: nextOffset(offset), connections: #root._page.connections})}}">
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
         {{/if}}
