@@ -10,6 +10,9 @@ Floatlabel.prototype.init = function () {
 Floatlabel.prototype.create = function () {
   if (this.input === document.activeElement) this.model.set('focused', 'focused');
   if (this.input.autofocus) this.input.focus();
+  if (this.input.value !== this.input.defaultValue)
+    this.model.setNull('value', this.input.value);
+  if (!this.empty()) this.model.set('focused', 'focused');
 }
 
 Floatlabel.prototype.focus = function () {
