@@ -25,6 +25,9 @@ app.get('home', '/', ['user']);
 app.get('explore', '/explore/:boardId/:connections*', [
   'user', 'board', 'connections', 'beads'
 ]);
+app.get('associations', '/associations/:boardId/:connections*', [
+  'user', 'connections', 'associations'
+]);
 app.get('collect', '/collect', [
   'user', 'clippings'
 ]);

@@ -63,6 +63,7 @@
     {{/each}}
   </svg>
 
+  <a as="associations" href="{{pathFor('associations', {boardId: #root._page.board.id, connections: connections})}}" style="display:none"></a>
   {{each beads}}
     <a id="{{this.id}}-link" href="{{url(this.id)}}" style="display:none"></a>
   {{/each}}

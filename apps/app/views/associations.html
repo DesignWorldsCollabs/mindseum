@@ -1,0 +1,13 @@
+<Body:>
+  <view is="header" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="list-group">
+          {{each _page.clippings}}
+          <view is="clipping" clipping="{{this}}" href="{{this.url}}" />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>

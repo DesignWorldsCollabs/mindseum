@@ -1,5 +1,6 @@
 import:(src="./home")
 import:(src="./explore")
+import:(src="./associations")
 import:(src='./login')
 import:(src='./register')
 
@@ -30,7 +31,7 @@ header:
         a.navbar-brand(href="/") Mindseum
       collapse.navbar-collapse(as="navbarCollapse")
         ul.nav.navbar-nav
-          li(class="{{if $render.ns === 'explore'}}active{{/if}}")
+          li(class="{{if $render.ns === 'explore' || $render.ns === 'associations'}}active{{/if}}")
             a(href="/explore/default-board") Explore
           li(class="{{if $render.ns === 'collect'}}active{{/if}}")
             a(href="/collect") Collect

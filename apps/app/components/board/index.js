@@ -111,7 +111,7 @@ Board.prototype.url = function (id) {
   return this.app.pathFor(this.model.root.get('$render.ns'), {
     boardId: this.model.root.get('_page.board.id'),
     offset: this.model.root.get('_page.offset'),
-    connections: this.connect(this.model.root.get('_page.connections'),id)
+    connections: this.connect(this.model.get('connections'),id)
   });
 }
 
@@ -122,9 +122,14 @@ Board.prototype.active = function (connections, beadId) {
 
 Board.prototype.click = function (id) {
   this.model.del('hover')
-  this.model.set('preview', id);
-  if (this.model.at('connections').get().indexOf(id) === -1)
+  var connections = this.model.at('connections').get();
+  if (connections.indexOf(id) === -1) {
+    this.model.set('preview', id);
     this.preview.show();
+  } else {
+    this.model.set('associations', connections);
+    this.associations.click();
+  }
 }
 
 Board.prototype.hovered = function (hover, id) {
