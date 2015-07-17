@@ -4,7 +4,8 @@ module.exports.setup = setup;
 function load() {
   var boardId = (this.params.boardId || 'default-board');
   var q = {};
-  q['associations.' + boardId] = {$all: this.model.get('_page.connections')}
+  var connections = this.model.get('_page.connections');
+  q['associations.' + boardId] = {$all: connections, $size: connections.length}
   this.query = this.model.query('clippings', q);
   this.addSubscriptions(this.query);
 }

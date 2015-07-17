@@ -8,9 +8,13 @@ function load() {
   for (var i = this.beads.length; i--;) {
     beadIds = this.model.get('_page.connections').slice();
     beadId = this.beads[i].id
-    if (beadIds.indexOf(beadId) === -1) beadIds.push(beadId);
     query = {$count: true, $query: {}};
-    query['$query']['associations.default-board'] = {$all: beadIds}
+    if (beadIds.indexOf(beadId) === -1) {
+      beadIds.push(beadId);
+      query['$query']['associations.default-board'] = {$all: beadIds}
+    } else {
+      query['$query']['associations.default-board'] = {$all: beadIds, $size: beadIds.length}
+    }
     this.query[i] = this.model.query('clippings', query);
     this.addFetches(this.query[i])
   }
