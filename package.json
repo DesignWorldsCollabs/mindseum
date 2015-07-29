@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "rm public/derby/manifest.json; node bundle.js",
     "start": "node server.js",
     "test": "protractor spec/conf.js",
     "install-webdriver": "webdriver-manager update"

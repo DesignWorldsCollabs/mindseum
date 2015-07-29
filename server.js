@@ -1,50 +1,16 @@
 if (process.env.NEW_RELIC_LICENSE_KEY) require('newrelic');
-var async = require('async');
 var derby = require('derby');
+var bundle = require('./server/bundle');
 
-var http  = require('http');
-var chalk = require('chalk');
+derby.run(runner);
 
-var publicDir = process.cwd() + '/public';
+function runner() {
+  bundle(serve);
+}
 
-derby.run(function(){
-  require('coffee-script/register');
-  require('yamlify/register');
-
-  require('./server/config');
-
-  var apps = [
-    require('./apps/app')
-    // <end of app list> - don't remove this comment
-  ];
-
-  var express = require('./server/express');
-  var store = require('./server/store')(derby, publicDir);
-
-  var error = require('./server/error');
-
-  express(store, apps, error, publicDir, function(expressApp, upgrade){
-    var server = http.createServer(expressApp);
-
-    server.on('upgrade', upgrade);
-
-    async.each(apps, bundleApp, function(){
-      server.listen(process.env.PORT, function() {
-        console.log('%d listening. Go to: http://localhost:%d/',
-            process.pid, process.env.PORT);
-      });
-    });
-
-    function bundleApp (app, cb) {
-      app.writeScripts(store, publicDir, {extensions: ['.coffee']}, function(err){
-        if (err) {
-          console.log("Bundle don't created:", chalk.red(app.name), ', error:', err);
-        } else {
-          console.log('Bundle created:', chalk.blue(app.name));
-        }
-        cb();
-      });
-    }
-
+function serve(server) {
+  server.listen(process.env.PORT, function() {
+    console.log('%d listening. Go to: http://localhost:%d/',
+        process.pid, process.env.PORT);
   });
-});
+}
