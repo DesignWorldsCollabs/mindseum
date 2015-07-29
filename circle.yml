@@ -1,0 +1,11 @@
+dependencies:
+  post:
+    - npm start:
+          background: true
+    - npm run install-webdriver
+    - wget --retry-connrefused -S http://localhost:3000/ -O /dev/null > /dev/null 2>&1
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: mindseum-next

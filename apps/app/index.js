@@ -21,6 +21,10 @@ app.loadViews(__dirname + '/views');
 app.loadStyles(__dirname + '/styles/bootstrap');
 app.loadStyles(__dirname + '/styles');
 
+app.on('model', function onModel(model) {
+  model.setNull('_page.title', 'Mindseum');
+})
+
 app.get('home', '/', ['user']);
 
 app.get('explore', '/explore/:boardId/:connections*', [
