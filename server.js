@@ -1,4 +1,5 @@
-if (process.env.NEW_RELIC_LICENSE_KEY) require('newrelic');
+require('newrelic');
+
 var derby = require('derby');
 var bundle = require('./server/bundle');
 
