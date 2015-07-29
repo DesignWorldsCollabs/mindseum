@@ -4,6 +4,7 @@ var app = module.exports = derby.createApp('app', __filename);
 
 app.component(require('d-connection-alert'));
 app.component(require('d-before-unload'));
+app.component(require('d-newrelic'));
 app.use(require('d-bootstrap'), {loadStyles: false});
 app.use(require('d-nprogress'));
 app.use(require('derby-login/components'));
