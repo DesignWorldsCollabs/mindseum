@@ -1,0 +1,31 @@
+<Body:>
+  <view is="header" />
+  <view is="curate" />
+
+<index:>
+  <div class="container-fluid">
+    {{if #root._page.clippings}}
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="list-group">
+          {{each #root._page.clippings}}
+          <view is="clipping"
+            clipping="{{this}}"
+            href="{{this.url}}"
+            connections="{{this.associations[#root.$render.params.boardId]}}"
+            connectionLabel="Explore" />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{else}}
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4 starter-template">
+        <h1>
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </h1>
+        <p class="lead">Add your own links to the Mindseum</p>
+      </div>
+    </div>
+    {{/if}}
+  </div>

@@ -50,6 +50,9 @@ app.get('associate:create', '/a/c/:boardId/:offset/:clippingId/:connections*', [
 app.get('associate', '/a/:boardId/:offset/:connections*', [
   'user', 'offset', 'board', 'associatable', 'connections'
 ]);
+app.get('curate', '/curate/:boardId', [
+  'user', 'clippingsToCurate'
+]);
 
 app.get('login', '/login');
 app.get('register', '/register');

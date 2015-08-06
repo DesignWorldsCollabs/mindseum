@@ -38,6 +38,8 @@ header:
             a(href="/collect") Collect
           li(class="{{if $render.ns === 'associate'}}active{{/if}}")
             a(href="{{pathFor('associate',{boardId: 'default-board', offset: '0', connections: []})}}") Associate
+          li(class="{{if $render.ns === 'curate'}}active{{/if}}")
+            a(href="{{pathFor('curate',{boardId: 'default-board'})}}") Curate
 
         ul.nav.navbar-nav.navbar-right
           if _session.loggedIn

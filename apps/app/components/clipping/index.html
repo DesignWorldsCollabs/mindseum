@@ -51,7 +51,7 @@
       </p>
       {{if @connections}}
       <div class="connections">
-        <button class="action btn btn-link">Associate</button>
+        <button class="action btn btn-link">{{@connectionLabel || 'Associate'}}</button>
         {{each @connections}}
         <div class="connection" style="background-image: url(/img/{{this}}.jpg)"></div>
         {{/each}}
