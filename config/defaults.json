@@ -2,7 +2,7 @@
   "NODE_ENV": "development",
   "PORT": 3000,
   "MONGO_URL": "mongodb://localhost:27017/mindseum",
-  "REDIS_URL": "redis://localhost:6379",
+  "REDIS_URL": "redis://default:HWtTp0SVafVvQgF4zjJVSqOhniVVF2Y0@redis-12925.c61.us-east-1-3.ec2.cloud.redislabs.com:12925",
   "SESSION_SECRET": "d30e353338c4eb64f3e6aa05961c0cb03be5c343",
   "SESSION_COOKIE": "d29aa2118e57aca5b4065261f24678284784bcba"
 }
